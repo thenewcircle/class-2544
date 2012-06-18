@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="hello">Hello World, HelloCiscoActivity!</string>
+    <string name="my_app_name">Hello, Cisco in SJ!!!!</string>
+</resources>
