@@ -4,16 +4,18 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <Button
+    <ImageButton
         android:onClick="onUpdateButtonClick"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/update" />
+        android:layout_gravity="right"
+        android:src="@android:drawable/ic_menu_send" />
 
     <MultiAutoCompleteTextView
         android:id="@+id/status_update_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:ems="10"
         android:hint="@string/status_hint" >
 

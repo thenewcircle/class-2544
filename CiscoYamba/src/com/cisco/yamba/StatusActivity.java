@@ -2,8 +2,11 @@ package com.cisco.yamba;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.marakana.android.yamba.clientlib.YambaClient;
 
 public class StatusActivity extends Activity {
 	TextView statusText;
@@ -20,6 +23,20 @@ public class StatusActivity extends Activity {
 	
 	/** Called when update button is clicked on. */
 	public void onUpdateButtonClick(View v) {
-		// TODO
+		final String status = statusText.getText().toString();
+		
+		new Thread() {
+			public void run() {
+				try {
+					YambaClient yambaClient = new YambaClient("student", "password");
+					yambaClient.updateStatus(status);
+				} catch (Exception e) {
+					Log.e("StatusActivity", "CRASHED!", e);
+					e.printStackTrace();
+				}
+			}
+		}.start();
+		
+		Log.d("StatusActivity", "onUpdateButtonClick'ed with text: "+status);
 	}
 }
