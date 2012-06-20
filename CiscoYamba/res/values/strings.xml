@@ -5,4 +5,5 @@
     <string name="update">Update!</string>
     <string name="status_hint">Enter your status...</string>
     <string name="default_max_length">140</string>
+    <string name="status_update">Status Update</string>
 </resources>
