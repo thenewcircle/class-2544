@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.item_prefs:
-			
+			startActivity( new Intent(this, PrefsActivity.class) );			
 			return true;
 		case R.id.item_status_update:
 			startActivity( new Intent(this, StatusActivity.class) );

@@ -12,14 +12,15 @@
         android:layout_below="@+id/status_update_button"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="@string/status_hint"
-        android:gravity="top" >
-		
+        android:gravity="top"
+        android:hint="@string/status_hint" >
+
         <requestFocus />
     </MultiAutoCompleteTextView>
 
     <ImageButton
         android:id="@+id/status_update_button"
+        style="@style/button_big_fat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

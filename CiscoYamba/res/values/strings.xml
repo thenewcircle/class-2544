@@ -8,4 +8,10 @@
     <string name="status_update">Status Update</string>
     <string name="preferences">Preferences</string>
     <string name="prefs">Prefs</string>
+    <string name="username">Username</string>
+    <string name="username_summary">How do you login into Yamba service?</string>
+    <string name="password">Password</string>
+    <string name="password_summary">And, what is your password?</string>
+    <string name="server">Server</string>
+    <string name="server_summary">What\'s the URL to your Yamba server?</string>
 </resources>
