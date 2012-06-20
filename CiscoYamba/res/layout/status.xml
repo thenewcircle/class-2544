@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/status_update_button"
         android:layout_alignLeft="@+id/status_update_text"
-        android:text="140"
+        android:text="@string/default_max_length"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
