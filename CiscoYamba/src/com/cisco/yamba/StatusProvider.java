@@ -29,6 +29,7 @@ public class StatusProvider extends ContentProvider {
 				SQLiteDatabase.CONFLICT_IGNORE);
 
 		if (id > 0) {
+			getContext().getContentResolver().notifyChange(uri, null);
 			return ContentUris.withAppendedId(uri, id);
 		} else {
 			return null;
@@ -51,8 +52,14 @@ public class StatusProvider extends ContentProvider {
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
-		// TODO Auto-generated method stub
-		return null;
+
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+		Cursor cursor = db.query(StatusContract.TABLE, projection, selection,
+				selectionArgs, null, null, sortOrder);
+		cursor.setNotificationUri( getContext().getContentResolver(), uri);
+		
+		return cursor;
 	}
 
 }
