@@ -25,8 +25,9 @@ public class StatusProvider extends ContentProvider {
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		long id = db.insert(StatusContract.TABLE, null, values);
-		
+		long id = db.insertWithOnConflict(StatusContract.TABLE, null, values,
+				SQLiteDatabase.CONFLICT_IGNORE);
+
 		if (id > 0) {
 			return ContentUris.withAppendedId(uri, id);
 		} else {

@@ -11,7 +11,7 @@ public final class StatusContract {
 	public static final Uri CONTENT_URI = Uri.parse("content://"+AUTHORITY+"/status");
 	
 	public static final String DB_NAME = "timeline.db";
-	public static final int DB_VERSION = 1;
+	public static final int DB_VERSION = 2;
 	public static final String TABLE = "timeline";
 	
 	public static final class Columns implements BaseColumns {
