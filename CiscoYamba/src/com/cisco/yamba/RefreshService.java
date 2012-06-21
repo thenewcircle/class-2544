@@ -1,24 +1,50 @@
 package com.cisco.yamba;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class RefreshService extends Service {
+import com.marakana.android.yamba.clientlib.YambaClient;
+import com.marakana.android.yamba.clientlib.YambaClient.TimelineProcessor;
+import com.marakana.android.yamba.clientlib.YambaClient.TimelineStatus;
+
+public class RefreshService extends IntentService {
+
 	private static final String TAG = "RefreshService";
-	
+	private YambaClient yambaClient;
+	private FriendsTimeline friendsTimeline;
+
+	public RefreshService() {
+		super(TAG);
+	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
+
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		String username = prefs.getString("username", null);
+		String password = prefs.getString("password", null);
+		String server = prefs.getString("server", null);
+		yambaClient = new YambaClient(username, password);
+		if (server != null && server.length() > 0)
+			yambaClient.setApiRoot(server);
+
+		friendsTimeline = new FriendsTimeline();
+
 		Log.d(TAG, "onCreate");
 	}
 
-
 	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
+	public void onHandleIntent(Intent intent) {
 		Log.d(TAG, "onStartCommand");
-		return START_STICKY;
+
+		// Fetches friends timeline from the cloud
+		yambaClient.fetchFriendsTimeline(friendsTimeline); // could take awhile
 	}
 
 	@Override
@@ -26,9 +52,36 @@ public class RefreshService extends Service {
 		super.onDestroy();
 		Log.d(TAG, "onDestroy");
 	}
-	
+
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
+	}
+
+	/** Processes callbacks from YambaClientLib for available statuses. */
+	class FriendsTimeline implements TimelineProcessor {
+
+		@Override
+		public void onStartProcessingTimeline() {
+			Log.d(TAG, "onStartProcessingTimeline");
+		}
+
+		@Override
+		public void onTimelineStatus(TimelineStatus status) {
+			Log.d(TAG,
+					String.format("%s: %s", status.getUser(),
+							status.getMessage()));
+		}
+
+		@Override
+		public boolean isRunnable() {
+			return true;
+		}
+
+		@Override
+		public void onEndProcessingTimeline() {
+			Log.d(TAG, "onEndProcessingTimeline");
+		}
+
 	}
 }
