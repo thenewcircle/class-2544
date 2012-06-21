@@ -4,9 +4,9 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/fragment_prefs"
+        android:id="@+id/fragment_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.cisco.yamba.PrefsFragment" />
+        class="com.cisco.yamba.StatusFragment" />
 
 </LinearLayout>
