@@ -14,4 +14,5 @@
     <string name="password_summary">And, what is your password?</string>
     <string name="server">Server</string>
     <string name="server_summary">What\'s the URL to your Yamba server?</string>
+    <string name="refresh">Refresh</string>
 </resources>

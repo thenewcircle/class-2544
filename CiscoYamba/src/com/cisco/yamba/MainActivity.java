@@ -28,16 +28,16 @@ public class MainActivity extends Activity {
 		
 		switch (item.getItemId()) {
 		case R.id.item_prefs:
-			intent.putExtra("fragment_id", R.id.fragment_prefs);
-			break;
+			startActivity( intent.putExtra("fragment_id", R.id.fragment_prefs) );
+			return true;
 		case R.id.item_status_update:
-			intent.putExtra("fragment_id", R.id.fragment_status);
-			break;
+			startActivity( intent.putExtra("fragment_id", R.id.fragment_status) );
+			return true;
+		case R.id.item_refresh:
+			startService( new Intent(this, RefreshService.class) );
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-		
-		startActivity( intent );
-		return true;
 	}
 }
