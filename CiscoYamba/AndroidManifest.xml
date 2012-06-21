@@ -14,7 +14,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
-        
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -22,16 +21,20 @@
             <!-- This makes it the "home page" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity android:name=".FragActivity" >
         </activity>
 
         <service android:name=".RefreshService" >
         </service>
-        
+
+        <provider
+            android:name=".StatusProvider"
+            android:authorities="com.cisco.yamba.provider" >
+        </provider>
     </application>
 
 </manifest>

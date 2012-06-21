@@ -1,6 +1,7 @@
 package com.cisco.yamba;
 
 import android.app.IntentService;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
@@ -36,7 +37,8 @@ public class RefreshService extends IntentService {
 
 		friendsTimeline = new FriendsTimeline();
 
-		Log.d(TAG, "onCreate");
+		Log.d(TAG, String.format("onCreate() yambaClient with %s:%s@%s",
+				username, password, server));
 	}
 
 	@Override
@@ -44,7 +46,12 @@ public class RefreshService extends IntentService {
 		Log.d(TAG, "onStartCommand");
 
 		// Fetches friends timeline from the cloud
-		yambaClient.fetchFriendsTimeline(friendsTimeline); // could take awhile
+		try {
+			yambaClient.fetchFriendsTimeline(friendsTimeline); // could take
+																// awhile
+		} catch (Exception e) {
+			Log.e(TAG, "Failed to fetch timeline", e);
+		}
 	}
 
 	@Override
@@ -71,6 +78,14 @@ public class RefreshService extends IntentService {
 			Log.d(TAG,
 					String.format("%s: %s", status.getUser(),
 							status.getMessage()));
+			
+			ContentValues values = new ContentValues();
+			values.put(StatusContract.Columns._ID, status.getId());
+			values.put(StatusContract.Columns.CREATED_AT, status.getCreatedAt().getTime());
+			values.put(StatusContract.Columns.USER, status.getUser());
+			values.put(StatusContract.Columns.TEXT, status.getMessage());
+			
+			getContentResolver().insert(StatusContract.CONTENT_URI, values);
 		}
 
 		@Override
