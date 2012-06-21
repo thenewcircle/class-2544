@@ -25,16 +25,18 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = new Intent(this, FragActivity.class);
-		
+
 		switch (item.getItemId()) {
 		case R.id.item_prefs:
-			startActivity( intent.putExtra("fragment_id", R.id.fragment_prefs) );
+			startActivity(intent.putExtra("fragment_id",
+					FragActivity.FRAGMENT_PREFS));
 			return true;
 		case R.id.item_status_update:
-			startActivity( intent.putExtra("fragment_id", R.id.fragment_status) );
+			startActivity(intent.putExtra("fragment_id",
+					FragActivity.FRAGMENT_STATUS));
 			return true;
 		case R.id.item_refresh:
-			startService( new Intent(this, RefreshService.class) );
+			startService(new Intent(this, RefreshService.class));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
