@@ -2,9 +2,11 @@ package com.cisco.yamba;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -33,12 +35,14 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		// Find the views
 		statusText = (TextView) view.findViewById(R.id.status_update_text);
 		statusText.addTextChangedListener(new MyTextWatcher());
-		counterText = (TextView) view.findViewById(R.id.status_update_counter_text);
+		counterText = (TextView) view
+				.findViewById(R.id.status_update_counter_text);
 		counterText.setText(Integer.toString(MAX_LENGTH - statusText.length()));
 		defaultColor = counterText.getTextColors().getDefaultColor();
-		updateButton = (ImageButton) view.findViewById(R.id.status_update_button);
+		updateButton = (ImageButton) view
+				.findViewById(R.id.status_update_button);
 		updateButton.setOnClickListener(this);
-		
+
 		return view;
 	}
 
@@ -56,7 +60,7 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dialog = new Dialog( getActivity() );
+			dialog = new Dialog(getActivity());
 			dialog.setTitle("Posting status update...");
 			dialog.show();
 		}
@@ -65,7 +69,14 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		@Override
 		protected String doInBackground(String... params) {
 			try {
-				YambaClient yambaClient = new YambaClient("student", "password");
+				SharedPreferences prefs = PreferenceManager
+						.getDefaultSharedPreferences(getActivity());
+				String username = prefs.getString("username", null);
+				String password = prefs.getString("password", null);
+				String server = prefs.getString("server", null);
+				YambaClient yambaClient = new YambaClient(username, password);
+				if (server != null && server.length() > 0)
+					yambaClient.setApiRoot(server);
 				yambaClient.updateStatus(params[0]); // could take some time
 				return "Status update posted successfully";
 			} catch (Exception e) {
@@ -80,8 +91,7 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
 			dialog.dismiss();
-			Toast.makeText( getActivity(), result, Toast.LENGTH_LONG)
-					.show();
+			Toast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
 		}
 
 	}
