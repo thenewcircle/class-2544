@@ -24,16 +24,20 @@ public class MainActivity extends Activity {
 	/** Called every time an options item is selected. */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = new Intent(this, FragActivity.class);
+		
 		switch (item.getItemId()) {
 		case R.id.item_prefs:
-			startActivity( new Intent(this, PrefsActivity.class) );			
-			return true;
+			intent.putExtra("fragment_id", R.id.fragment_prefs);
+			break;
 		case R.id.item_status_update:
-			startActivity( new Intent(this, StatusActivity.class) );
-			return true;
+			intent.putExtra("fragment_id", R.id.fragment_status);
+			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+		
+		startActivity( intent );
+		return true;
 	}
-
 }

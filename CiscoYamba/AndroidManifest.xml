@@ -25,13 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".StatusActivity"
-            android:label="@string/status_update" >
-        </activity>
-        <activity
-            android:name=".PrefsActivity"
-            android:label="@string/preferences" >
+        <activity android:name=".FragActivity" >
         </activity>
     </application>
 
