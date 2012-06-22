@@ -2,6 +2,7 @@ package com.cisco.yamba;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -78,6 +79,11 @@ public class StatusFragment extends Fragment implements OnClickListener {
 				if (server != null && server.length() > 0)
 					yambaClient.setApiRoot(server);
 				yambaClient.updateStatus(params[0]); // could take some time
+
+				// Send broadcast that there may be new data on the server
+				getActivity().sendBroadcast(
+						new Intent("com.cisco.yamba.REFRESH_ACTION"));
+				
 				return "Status update posted successfully";
 			} catch (Exception e) {
 				Log.e("StatusActivity", "CRASHED!", e);
