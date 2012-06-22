@@ -39,6 +39,7 @@
         <receiver android:name=".RefreshReceiver">
             <intent-filter>
                 <action android:name="com.cisco.yamba.REFRESH_ACTION"/>
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
             </intent-filter>
         </receiver>
         
