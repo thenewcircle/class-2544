@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -78,14 +79,24 @@ public class RefreshService extends IntentService {
 			Log.d(TAG,
 					String.format("%s: %s", status.getUser(),
 							status.getMessage()));
-			
+
 			ContentValues values = new ContentValues();
 			values.put(StatusContract.Columns._ID, status.getId());
-			values.put(StatusContract.Columns.CREATED_AT, status.getCreatedAt().getTime());
+			values.put(StatusContract.Columns.CREATED_AT, status.getCreatedAt()
+					.getTime());
 			values.put(StatusContract.Columns.USER, status.getUser());
 			values.put(StatusContract.Columns.TEXT, status.getMessage());
-			
-			getContentResolver().insert(StatusContract.CONTENT_URI, values);
+
+			Uri uri = getContentResolver().insert(StatusContract.CONTENT_URI,
+					values);
+
+			// Do we have a new status?
+			if (uri != null) {
+				Intent intent = new Intent("com.cisco.yamba.NEW_STATUS");
+				intent.putExtra(StatusContract.Columns.USER, status.getUser())
+						.putExtra(StatusContract.Columns.TEXT, status.getMessage());
+				sendBroadcast(intent);
+			}
 		}
 
 		@Override
