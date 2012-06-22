@@ -35,6 +35,13 @@
             android:name=".StatusProvider"
             android:authorities="com.cisco.yamba.provider" >
         </provider>
+        
+        <receiver android:name=".RefreshReceiver">
+            <intent-filter>
+                <action android:name="com.cisco.yamba.REFRESH_ACTION"/>
+            </intent-filter>
+        </receiver>
+        
     </application>
 
 </manifest>
