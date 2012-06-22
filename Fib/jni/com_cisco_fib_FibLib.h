@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_com_cisco_fib_FibLib_fibN
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     com_cisco_fib_FibLib
+ * Method:    fibNI
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_cisco_fib_FibLib_fibNI
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif
