@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.widget.SimpleCursorAdapter;
 
 public class TimelineFragment extends ListFragment {
-	private static final String[] FROM = { StatusContract.Columns.TEXT };
-	private static final int[] TO = { android.R.id.text1 };
+	private static final String[] FROM = { StatusContract.Columns.USER, StatusContract.Columns.TEXT };
+	private static final int[] TO = { android.R.id.text1, android.R.id.text2 };
 	private SimpleCursorAdapter adapter;
 	private Cursor cursor;
 
@@ -21,7 +21,7 @@ public class TimelineFragment extends ListFragment {
 				StatusContract.SORT_ORDER);
 
 		adapter = new SimpleCursorAdapter(getActivity(),
-				android.R.layout.simple_list_item_1, cursor, FROM, TO);
+				android.R.layout.simple_list_item_2, cursor, FROM, TO);
 		
 		setListAdapter(adapter);
 	}
