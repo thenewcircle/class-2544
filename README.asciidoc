@@ -1,13 +1,7 @@
 = Notes = 
 
-http://marakana.com/static/courseware/android/Learning_Android.pdf
-http://marakana.com/static/courseware/android/AndroidOverview-Bootcamp.pdf
-
 == Survey 
 http://www.metricsthatmatter.com/student/evaluation.asp?k=16324&i=ILT00278153
 
 == Homework
 Watch http://mrkn.co/f/595[Eclipse Video]
-
-== Useful links
-* http://www.screaming-penguin.com/info/android_drawables/android_drawables.html
