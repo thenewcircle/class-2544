@@ -5,3 +5,4 @@ http://www.metricsthatmatter.com/student/evaluation.asp?k=16324&i=ILT00278153
 
 == Homework
 Watch http://mrkn.co/f/595[Eclipse Video]
+Watch http://marakana.com/s/introduction_to_ndk,1153/index.html[Intro to NDK]
